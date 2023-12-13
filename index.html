@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sunset" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list (with indexedDB) | LittleOddBoy | sabzlearn.ir</title>
+
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <style>
+
+    </style>
+</head>
+
+<body class="font-mono w-screen h-screen flex flex-col justify-between selection:text-base-300 selection:bg-base-content">
+    <section>
+        <header
+            class="p-5 flex justify-between items-center bg-base-200 border border-t-0 border-base-content/20 sticky top-0 transition-colors rounded-b-3xl hover:bg-base-300">
+            <h1 class="text-lg flex items-center gap-x-2 font-bold md:text-xl lg:text-2xl">
+                Todo List <div class="tooltip tooltip-bottom lg:focus:tooltip" data-tip="MDN">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB"
+                        target="_blank"
+                        class="badge badge-md bg-neutral text-neutral-content hover:badge-outline select-none md:badge-lg lg:text-xl">with
+                        IndexedDB</a>
+                </div>
+            </h1>
+            <label class="cursor-pointer grid place-items-center">
+                <input type="checkbox" value="fantasy"
+                    class="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
+                <svg class="col-start-1 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg"
+                    width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="col-start-2 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg"
+                    width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                </svg>
+
+            </label>
+        </header>
+        <main class="mt-3 flex justify-center items-center">
+            <div class="card bg-base-200 rounded-3xl p-3 w-10/12 lg:w-8/12 xl:w-6/12 border border-base-content/20">
+                <div class="card-action">
+                    <div class="flex gap-x-2">
+                        <input type="text" id="todoInput" class="input rounded-3xl w-full"
+                            placeholder="write your task..." data-task-id="">
+                        <button id="todoButton" class="btn btn-square w-1/12">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="taskList" class="card-body p-0 mt-5">
+                    <div class="border-2 border-base-100 rounded-2xl p-3 flex justify-between items-center border-base-content/20">
+                        <div class="truncate flex items-center gap-x-2 group">
+                            <input type="checkbox" class="checkbox checkbox-sm peer">
+                            <span class="truncate peer-checked:line-through">
+                                You don't have to run...
+                            </span>
+                        </div>
+                        <div class="w-1/2 flex justify-end gap-x-2">
+                            
+                            <button class="btn btn-circle btn-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg>
+                            </button>
+                            <button class="btn bg-base-content text-base-100 btn-circle btn-sm hover:bg-transparent hover:text-base-content">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                    class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    <footer
+        class="text-center p-5 bg-base-200 border border-b-0 border-base-content/20 transition-colors rounded-t-3xl hover:bg-base-300 lg:text-left">
+        <span>
+            © Developed by <a href="https://github.com/LittleOddBoy"
+                class="link font-bold transition-colors hover:text-primary">@LittleOddBoy</a> with
+            <span class="text-red-500">love</span>!
+        </span>
+    </footer>
+
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>
